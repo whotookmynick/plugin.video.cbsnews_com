@@ -121,7 +121,9 @@ def playEveningNewsLatest():
 
 def playVideo(url, title="", thumb="DefaultVideo.png"):
     content = getUrl(url)
-    match=re.compile('"mediaHlsURI":"(.+?)"', re.DOTALL).findall(content)
+    match = re.compile('"mediaRtmpMobileHighURI":"(.+?)"',re.DOTALL).findall(content);
+    if not match:
+        match=re.compile('"mediaHlsURI":"(.+?)"', re.DOTALL).findall(content)
     streamUrl = match[0].replace("\\","")
     if thumb!="DefaultVideo.png":
         listitem = xbmcgui.ListItem(path=streamUrl, thumbnailImage=thumb)
